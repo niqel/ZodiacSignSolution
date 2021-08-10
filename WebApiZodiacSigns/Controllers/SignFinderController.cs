@@ -9,7 +9,7 @@ using WebApiZodiacSigns.Models;
 
 namespace WebApiZodiacSigns.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("[controller]")]
     [ApiController]
     public class SignFinderController : ControllerBase
     {
