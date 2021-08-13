@@ -1,11 +1,12 @@
-﻿using Controllers.IControllers;
+﻿
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using WebApiZodiacSigns.Models;
+using ApiZodiacSigns.IApis;
+using ApiZodiacSigns.Models;
 
 namespace WebApiZodiacSigns.Controllers
 {
@@ -13,38 +14,38 @@ namespace WebApiZodiacSigns.Controllers
     [ApiController]
     public class SignFinderController : ControllerBase
     {
-        private readonly ISignFinder<Sign> signFinder;
+        private readonly ISignFinder signFinder;
 
-        public SignFinderController(ISignFinder<Sign> signFinder)
+        public SignFinderController(ISignFinder signFinder)
         {
             this.signFinder = signFinder;
         }
 
         [HttpGet]
-        public ReplySign GetAll()
+        public Reply<Sign> GetAll()
         {
-            var reply = signFinder.GetAllSigns();
+            var reply = signFinder.GetAll();
             return reply;
         }
 
         [HttpGet("{id}")]
-        public ReplySign Get(int id)
+        public Reply<Sign> Get(int id)
         {
-            var reply = signFinder.GetSignById(id);
+            var reply = signFinder.GetById(id);
             return reply;
         }
 
         [HttpGet("{idElement}")]
-        public ReplySign GetByIdElement(int idElement)
+        public Reply<Sign> GetByIdElement(int idElement)
         {
-            var reply = signFinder.GetSignsByElementId(idElement);
+            var reply = signFinder.GetSignByIdElement(idElement);
             return reply;
         }
 
         [HttpGet("{idPLanet}")]
-        public ReplySign getByIdPlanet(int idPlanet)
+        public Reply<Sign> GetByIdPlanet(int idPlanet)
         {
-            var reply = signFinder.GetSignsByPlanetId(idPlanet);
+            var reply = signFinder.GetSignByIdPlanet(idPlanet);
             return reply;
         }
     }

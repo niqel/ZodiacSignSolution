@@ -4,8 +4,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using WebApiZodiacSigns.Models;
-using WebApiZodiacSigns.IController;
+using ApiZodiacSigns.Models;
+using ApiZodiacSigns.IApis;
 
 namespace WebApiZodiacSigns.Controllers
 {
@@ -21,23 +21,23 @@ namespace WebApiZodiacSigns.Controllers
         }
 
         [HttpGet]
-        public ReplyPlanet GetAll()
+        public Reply<Planet> GetAll()
         {
-            var reply = planetFinder.GetAllPlanets();
+            var reply = planetFinder.GetAll();
             return reply;
         }
 
         [HttpGet("{id}")]
-        public ReplyPlanet Get(int id)
+        public Reply<Planet> Get(int id)
         {
-            var reply = planetFinder.GetPlanetById(id);
+            var reply = planetFinder.GetById(id);
             return reply;
         }
 
         [HttpGet("{idSign}")]
-        public ReplyPlanet GetByIdPlanet(int idSign)
+        public Reply<Planet> GetByIdPlanet(int idSign)
         {
-            var reply = planetFinder.GetPlanetById(idSign);
+            var reply = planetFinder.GetPlanetByIdSign(idSign);
             return reply;
         }
     }

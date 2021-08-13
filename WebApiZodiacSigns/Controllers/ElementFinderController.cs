@@ -3,8 +3,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using WebApiZodiacSigns.IController;
-using WebApiZodiacSigns.Models;
+using ApiZodiacSigns.Models;
+using ApiZodiacSigns.IApis;
 
 namespace WebApiZodiacSigns.Controllers
 {
@@ -12,31 +12,31 @@ namespace WebApiZodiacSigns.Controllers
     [ApiController]
     public class ElementFinderController : ControllerBase
     {
-        private readonly IElementFinder<Element> elementFinder;
+        private readonly IElementFinder elementFinder;
 
-        public ElementFinderController(IElementFinder<Element> elementFinder)
+        public ElementFinderController(IElementFinder elementFinder)
         {
             this.elementFinder = elementFinder;
         }
 
         [HttpGet]
-        public ReplyElement GetAll()
+        public Reply<Element> GetAll()
         {
-            var reply = elementFinder.GetAllElements();
+            var reply = elementFinder.GetAll();
             return reply;
         }
 
         [HttpGet("{id}")]
-        public ReplyElement Get(int id)
+        public Reply<Element> Get(int id)
         {
-            var reply = elementFinder.GetElementById(id);
+            var reply = elementFinder.GetById(id);
             return reply;
         }
 
         [HttpGet("{idElement}")]
-        public ReplyElement GetByIdElement(int idSign)
+        public Reply<Element> GetElementBySign(int idSign)
         {
-            var reply = elementFinder.GetElementByIdSign(idSign);
+            var reply = elementFinder.GetById(idSign);
             return reply;
         }
     }
